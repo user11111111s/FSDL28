@@ -3,36 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish To-Do List</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li button {
+            background-color: #d9534f;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        li button:hover {
+            background-color: #c9302c;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h3 class="card-title text-center mb-4">To-Do List</h3>
-                        <div class="mb-3">
-                            <input type="text" id="task-input" class="form-control" placeholder="Enter a task">
-                        </div>
-                        <button id="add-task-btn" class="btn btn-primary w-100">Add Task</button>
+<div class="container">
+    <h2>Todo List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a new task...">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+</div>
 
-                        <ul id="task-list" class="list-group mt-3">
-                            <!-- Tasks will appear here -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+    // Function to add a new task to the list
+    function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const taskText = taskInput.value.trim();
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+        if (taskText !== "") {
+            const taskList = document.getElementById("taskList");
+
+            const li = document.createElement("li");
+            li.innerHTML = taskText + ' <button onclick="removeTask(this)">Remove</button>';
+
+            taskList.appendChild(li);
+
+            taskInput.value = ""; // Clear input field after adding task
+        } else {
+            alert("Please enter a task.");
+        }
+    }
+
+    // Function to remove a task from the list
+    function removeTask(button) {
+        const li = button.parentElement;
+        li.remove();
+    }
+</script>
+
 </body>
 </html>
