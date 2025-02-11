@@ -1,0 +1,28 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+#task-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.delete-btn {
+    cursor: pointer;
+    color: red;
+}
