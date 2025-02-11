@@ -7,28 +7,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Moon Phases and Tide Information</h1>
+  <header>
+    <h1>Moon Phases & Tide Information</h1>
+    <p>Your real-time guide to the current moon phase and tides.</p>
+  </header>
 
+  <div class="container">
     <div id="moon-phase">
       <h2>Current Moon Phase</h2>
-      <div id="moon-icon"></div> <!-- Space for the moon diagram -->
+      <canvas id="moonPhaseChart"></canvas> <!-- Canvas for the Moon Phase -->
       <p id="phase"></p>
     </div>
 
     <div id="tide-info">
-      <h2>Current Tide Information:</h2>
+      <h2>Current Tide Information</h2>
       <p id="tide"></p>
     </div>
 
     <div id="chart-container">
       <h2>Tide Graph</h2>
       <canvas id="tideChart"></canvas>
-    </div>
-
-    <div id="moon-phase-container">
-      <h2>Moon Phase Diagram</h2>
-      <canvas id="moonPhaseChart"></canvas>
     </div>
   </div>
 

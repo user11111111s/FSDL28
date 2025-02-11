@@ -74,7 +74,7 @@ function plotTideGraph(tideTimes) {
 // Function to plot the moon phase diagram
 function plotMoonPhase(moonPhase) {
   const ctx = document.getElementById('moonPhaseChart').getContext('2d');
-
+  
   const moonPhases = {
     "New Moon": "images/new_moon.png",
     "First Quarter": "images/first_quarter.png",
@@ -88,6 +88,7 @@ function plotMoonPhase(moonPhase) {
   moonPhaseImage.src = phaseImage;
   
   moonPhaseImage.onload = function () {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear the canvas first
     ctx.drawImage(moonPhaseImage, 0, 0, ctx.canvas.width, ctx.canvas.height);
   };
 }
