@@ -29,15 +29,15 @@ h1 {
   color: #ffcb77; /* Golden text color */
 }
 
-#moon-phase, #tide-info {
-  margin-bottom: 30px;
-}
-
 h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
   font-weight: bold;
   color: #ffcb77;
+}
+
+#moon-phase, #tide-info {
+  margin-bottom: 30px;
 }
 
 #phase, #tide {
@@ -47,7 +47,7 @@ h2 {
   color: #eaeaea; /* Light gray color */
 }
 
-#chart-container {
+#chart-container, #moon-phase-container {
   margin-top: 30px;
 }
 
