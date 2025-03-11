@@ -62,7 +62,7 @@
                                 <img src={food.image} alt={food.name} className="w-full h-40 object-cover rounded-md mb-4" />
                                 <h2 className="text-xl font-semibold text-gray-800">{food.name}</h2>
                                 <p className="text-lg text-gray-500">₹{food.price}</p>
-                                <button
+                                <button>
                                     onClick={() => addFoodToCart(food)}
                                     className="mt-4 bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 focus:outline-none"
                                 >
@@ -83,6 +83,7 @@
                                     </li>
                                 ))}
                             </ul>
+                            
                             <div className="mt-4 flex justify-between">
                                 <h3 className="text-xl font-semibold text-gray-800">Total: ₹{calculateTotal()}</h3>
                                 <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none">

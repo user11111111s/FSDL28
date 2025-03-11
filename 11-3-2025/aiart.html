@@ -1,0 +1,76 @@
+npx create-react-app ai-art-generator
+cd ai-art-generator
+npm start
+import React, { useState } from "react";
+import axios from "axios";
+
+const AiArtGenerator = () => {
+  const [prompt, setPrompt] = useState(""); // Text input for the prompt
+  const [imageUrl, setImageUrl] = useState(""); // Store the generated image URL
+  const [loading, setLoading] = useState(false); // Loading state for the request
+  const [error, setError] = useState(""); // Error state
+
+  const handleInputChange = (event) => {
+    setPrompt(event.target.value);
+  };
+
+  const handleGenerateImage = async () => {
+    setLoading(true);
+    setError("");
+    setImageUrl(""); // Clear previous image
+
+    const apiKey = "YOUR_OPENAI_API_KEY"; // Replace with your OpenAI API key
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/images/generations",
+        {
+          prompt: prompt,
+          n: 1,
+          size: "1024x1024",
+        },
+        { headers: headers }
+      );
+
+      setImageUrl(response.data.data[0].url); // Get the URL of the generated image
+      setLoading(false);
+    } catch (err) {
+      setError("Failed to generate image. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1 className="title">AI Art Generator</h1>
+      <input
+        type="text"
+        placeholder="Enter a prompt for the artwork"
+        value={prompt}
+        onChange={handleInputChange}
+        className="input"
+      />
+      <button
+        onClick={handleGenerateImage}
+        className="button"
+        disabled={loading || !prompt}
+      >
+        {loading ? "Generating..." : "Generate Art"}
+      </button>
+
+      {error && <p className="error">{error}</p>}
+
+      {imageUrl && (
+        <div className="image-container">
+          <img src={imageUrl} alt="Generated Artwork" className="generated-image" />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AiArtGenerator;
