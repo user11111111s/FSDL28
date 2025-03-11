@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React and ReactDOM CDN -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel CDN for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone"></script>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+    <div id="root" class="min-h-screen flex items-center justify-center py-12 px-6">
+        <!-- React App will be rendered here -->
+    </div>
+
+    <script type="text/babel">
+        const TodoApp = () => {
+            const [todos, setTodos] = React.useState([]);
+            const [newTodo, setNewTodo] = React.useState("");
+
+            // Add a new to-do item
+            const addTodo = () => {
+                if (newTodo.trim()) {
+                    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+                    setNewTodo(""); // Clear input field
+                }
+            };
+
+            // Toggle completion of a to-do item
+            const toggleTodoCompletion = (id) => {
+                setTodos(todos.map(todo =>
+                    todo.id === id
+                        ? { ...todo, completed: !todo.completed }
+                        : todo
+                ));
+            };
+
+            // Delete a to-do item
+            const deleteTodo = (id) => {
+                setTodos(todos.filter(todo => todo.id !== id));
+            };
+
+            return (
+                <div className="bg-white shadow-xl rounded-lg p-6 max-w-md w-full">
+                    <h1 className="text-3xl font-bold text-center text-gray-700 mb-6">To-Do List</h1>
+
+                    <div className="flex mb-4">
+                        <input
+                            type="text"
+                            value={newTodo}
+                            onChange={(e) => setNewTodo(e.target.value)}
+                            className="flex-grow p-3 border-2 border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="Add a new task"
+                        />
+                        <button
+                            onClick={addTodo}
+                            className="bg-indigo-500 text-white p-3 rounded-r-md hover:bg-indigo-600 focus:outline-none"
+                        >
+                            Add Task
+                        </button>
+                    </div>
+
+                    <h2 className="text-xl font-semibold text-gray-700 mb-3">Tasks</h2>
+                    {todos.length > 0 ? (
+                        <ul className="space-y-4">
+                            {todos.map(todo => (
+                                <li
+                                    key={todo.id}
+                                    className={`flex justify-between items-center p-4 rounded-lg shadow-md ${
+                                        todo.completed ? 'bg-gray-200 line-through' : 'bg-gray-50'
+                                    }`}
+                                >
+                                    <div className="flex items-center space-x-3">
+                                        <input
+                                            type="checkbox"
+                                            checked={todo.completed}
+                                            onChange={() => toggleTodoCompletion(todo.id)}
+                                            className="h-5 w-5 rounded border-gray-300"
+                                        />
+                                        <span className={`text-gray-700 ${todo.completed ? 'text-gray-400' : ''}`}>
+                                            {todo.text}
+                                        </span>
+                                    </div>
+                                    <button
+                                        onClick={() => deleteTodo(todo.id)}
+                                        className="bg-red-500 text-white rounded-full px-3 py-1 hover:bg-red-600 focus:outline-none"
+                                    >
+                                        Delete
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-center text-gray-500 mt-4">No tasks available.</p>
+                    )}
+                </div>
+            );
+        };
+
+        // Render the TodoApp component to the DOM
+        ReactDOM.render(<TodoApp />, document.getElementById('root'));
+    </script>
+</body>
+</html>
