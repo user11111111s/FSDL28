@@ -4,4 +4,4 @@ len =parseFloat(len);
 bred =parseFloat(bred);
 let total =len*bred;
 
-alert("the area of the rectangle =",total);
+alert("the area of the rectangle ="+total);
