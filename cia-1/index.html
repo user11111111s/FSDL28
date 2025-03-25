@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox 2-Column Layout</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Container using flexbox */
+        .container {
+            display: flex;
+            min-height: 100vh; /* Full viewport height */
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            flex: 0 0 250px; /* Don't grow, don't shrink, fixed width */
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+        
+        .sidebar h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+        }
+        
+        .sidebar a:hover {
+            color: #3498db;
+        }
+        
+        /* Main content styling */
+        .main-content {
+            flex: 1; /* Takes up remaining space */
+            padding: 30px;
+            background-color: #ecf0f1;
+        }
+        
+        .main-content h1 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Responsive design - stack columns on small screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 0 0 auto; /* Reset flex for sidebar */
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <h1>Welcome to Our Website</h1>
+            
+            <div class="card">
+                <h2>Main Content Area</h2>
+                <p>This is the primary content section of your webpage. It will expand to fill the available space while the sidebar maintains a fixed width.</p>
+                <p>Flexbox makes it easy to create this two-column layout without worrying about floats or positioning.</p>
+            </div>
+            
+            <div class="card">
+                <h2>Flexbox Benefits</h2>
+                <p>With flexbox, you can:</p>
+                <ul>
+                    <li>Create flexible layouts with minimal code</li>
+                    <li>Easily align items vertically and horizontally</li>
+                    <li>Reorder content visually without changing HTML</li>
+                    <li>Create responsive designs that adapt to different screen sizes</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
